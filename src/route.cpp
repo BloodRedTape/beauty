@@ -92,6 +92,10 @@ route::match(beauty::request& req, bool is_websocket) const noexcept
     // Remove attributes and target split
     auto target_split = split(std::string_view{req.target().data(), req.target().size()}, '?');
     auto request_paths = split(target_split[0], '/');
+    
+    //All matching path
+    if(_segments.size() == 2 && _segments.back() == "**")
+        return true;
 
     if (_segments.size() != request_paths.size()) {
         return false;
