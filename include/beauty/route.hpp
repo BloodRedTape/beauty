@@ -44,6 +44,8 @@ public:
         _ws_handler.on_disconnect(ctx);
     }
 
+    bool is_wildcard()const;
+
     [[nodiscard]] const std::string& path() const noexcept { return _path; }
     [[nodiscard]] const std::vector<std::string>& segments() const noexcept { return _segments; }
     [[nodiscard]] const beauty::route_info& route_info() const noexcept { return _route_info; }

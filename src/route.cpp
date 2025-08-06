@@ -94,7 +94,7 @@ route::match(beauty::request& req, bool is_websocket) const noexcept
     auto request_paths = split(target_split[0], '/');
     
     //All matching path
-    if(_segments.size() == 2 && _segments.back() == "**")
+    if(is_wildcard())
         return true;
 
     if (_segments.size() != request_paths.size()) {
@@ -123,6 +123,10 @@ route::match(beauty::request& req, bool is_websocket) const noexcept
     }
 
     return true;
+}
+bool 
+route::is_wildcard()const {
+    return _segments.size() == 2 && _segments.back() == "**";
 }
 
 }

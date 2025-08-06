@@ -11,6 +11,11 @@ router::add_route(beast::http::verb v, route&& r)
 
     std::sort(_routes[v].begin(), _routes[v].end(),
             [](const beauty::route& lh, const beauty::route& rh) {
+                if(rh.is_wildcard())
+                    return true;
+                if(lh.is_wildcard())
+                    return false;
+
                 const auto lh_segment_count = lh.segments().size();
                 const auto rh_segment_count = rh.segments().size();
 
