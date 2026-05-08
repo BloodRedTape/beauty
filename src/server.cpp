@@ -47,9 +47,8 @@ server::listen(int port, const std::string& address)
         // the caller of listen()
         auto resolved = resolver.resolve(resolve_address, std::to_string(port));
 
-        while (resolved != boost::asio::ip::tcp::resolver::iterator()) {
-            _endpoints.push_back(resolved->endpoint());
-            resolved++;
+        for (const auto& entry : resolved) {
+            _endpoints.push_back(entry.endpoint());
         }
     }
 

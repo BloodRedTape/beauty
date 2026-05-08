@@ -87,6 +87,7 @@ elseif(WIN32)
             _WIN32_WINNT=0xA00
             _CRT_SECURE_NO_WARNINGS
             _ITERATOR_DEBUG_LEVEL=$<IF:$<CONFIG:Debug>,2,0>
+            BOOST_JSON_STATIC_LINK
     )
     target_compile_options(beauty PRIVATE "/bigobj")
 endif()
@@ -99,8 +100,8 @@ target_include_directories(beauty
 )
 
 target_link_libraries(beauty
-    PUBLIC
-        Boost::boost
+    PUBLIC Boost::boost
+	PUBLIC Boost::asio
 )
 if (BEAUTY_ENABLE_OPENSSL)
     target_link_libraries(beauty
