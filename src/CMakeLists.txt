@@ -101,7 +101,7 @@ target_include_directories(beauty
 
 target_link_libraries(beauty
     PUBLIC Boost::boost
-	PUBLIC Boost::asio
+	$<$<BOOL:${VCPKG_TOOLCHAIN}>:Boost::asio>
 )
 if (BEAUTY_ENABLE_OPENSSL)
     target_link_libraries(beauty
